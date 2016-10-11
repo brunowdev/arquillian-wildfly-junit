@@ -93,14 +93,6 @@
 				<type>pom</type>
 			</dependency>
 
-			<!-- JUnit regression testing framework. -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${version.junit}</version>
-			</dependency>
-
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -176,18 +168,19 @@
 
 	<dependencies>
 
-		<!-- JUnit regression testing framework. -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-
 		<!-- JUnit Container Implementation for the Arquillian Project -->
 		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
 			<scope>test</scope>
 		</dependency>
+		
+			<dependency>
+				<groupId>org.jboss.arquillian.testng</groupId>
+				<artifactId>arquillian-testng-container</artifactId>
+				<scope>test</scope>
+			</dependency>
 
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
@@ -199,19 +192,19 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		
-		<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-jaxrs</artifactId>
-				<version>3.0.19.Final</version>
-			</dependency>
 
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-client</artifactId>
-				<version>3.0.19.Final</version>
-			</dependency>
-		
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.19.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.0.19.Final</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

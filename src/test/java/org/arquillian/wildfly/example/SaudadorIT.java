@@ -1,39 +1,28 @@
 package org.arquillian.wildfly.example;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.URL;
 
 import javax.inject.Inject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import junit.framework.Assert;
-
-@RunWith(Arquillian.class)
-public class SaudadorIT {
+public class SaudadorIT extends Arquillian {
 
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "minha-aplicacao-it.jar").addClass(Saudador.class)
-				.addClass(Math.class).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+				.addClass(Math.class).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+				.addAsManifestResource("test-persistence.xml", "persistence.xml");
 	}
 
 	@Inject
@@ -60,7 +49,7 @@ public class SaudadorIT {
 		String response = responseObj.getEntity().replaceAll("<\\?xml.*\\?>", "").trim();
 		Assert.assertEquals("Restful example : rest", response);
 
-		assertEquals("Olá, Júlia!", saudador.criarSaudacao("Júlia"));
+		Assert.assertEquals("Olá, Júlia!", saudador.criarSaudacao("Júlia"));
 	}
 
 	static final String ACCEPTED_HEADERS = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
